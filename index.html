@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Portal | ගෙවීම් තොරතුරු</title>
+
+    <meta name="description"
+          content="Company bank account details and payment receipt WhatsApp portal.">
+
+    <style>
+
+        /* ================================
+           RESET
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Noto Sans Sinhala",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: #172033;
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    #dcecff 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 100%,
+                    #d5e8ff 0%,
+                    transparent 35%
+                ),
+                #f5f8fc;
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        header {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #061f50,
+                    #0a56b5
+                );
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: white;
+            color: #0a55ad;
+
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .logo h2 {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            display: block;
+
+            margin-top: 2px;
+
+            font-size: 11px;
+            opacity: 0.82;
+        }
+
+        .secure {
+            padding: 9px 16px;
+
+            border: 1px solid rgba(255,255,255,0.28);
+
+            border-radius: 30px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            font-size: 13px;
+        }
+
+
+        /* ================================
+           HERO
+        ================================= */
+
+        .hero {
+            max-width: 1100px;
+
+            margin: 60px auto 35px;
+
+            padding: 0 25px;
+
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            padding: 9px 19px;
+
+            border-radius: 50px;
+
+            background: #e8f2ff;
+
+            color: #0755aa;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            margin-bottom: 18px;
+
+            color: #071d43;
+
+            font-size:
+                clamp(34px, 5vw, 58px);
+
+            line-height: 1.08;
+
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: #1264ca;
+        }
+
+        .hero p {
+            max-width: 720px;
+
+            margin: auto;
+
+            color: #647188;
+
+            font-size: 16px;
+
+            line-height: 1.9;
+        }
+
+
+        /* ================================
+           PAYMENT SECTION
+        ================================= */
+
+        .payments {
+            max-width: 1100px;
+
+            margin: 45px auto 70px;
+
+            padding: 0 25px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+
+            text-align: center;
+        }
+
+        .section-title h2 {
+            color: #091f44;
+
+            font-size: 30px;
+
+            font-weight: 800;
+        }
+
+        .section-title p {
+            margin-top: 8px;
+
+            color: #718096;
+
+            line-height: 1.8;
+        }
+
+
+        /* ================================
+           BANK GRID
+        ================================= */
+
+        .bank-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* ================================
+           BANK CARD
+        ================================= */
+
+        .bank-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 25px;
+
+            border:
+                1px solid #e1e8f2;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,0.97);
+
+            box-shadow:
+                0 12px 38px
+                rgba(20,55,100,0.08);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .bank-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 20px 50px
+                rgba(20,55,100,0.15);
+        }
+
+        .bank-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 110px;
+            height: 110px;
+
+            right: -40px;
+            top: -40px;
+
+            border-radius: 50%;
+
+            background: #eaf3ff;
+
+            pointer-events: none;
+        }
+
+
+        /* ================================
+           BANK HEADER
+        ================================= */
+
+        .bank-top {
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 23px;
+        }
+
+
+        /* ================================
+           BANK LOGO
+        ================================= */
+
+        .bank-logo {
+            width: 62px;
+            height: 62px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid #e1e8f2;
+
+            border-radius: 14px;
+
+            background: white;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,.06);
+
+            overflow: hidden;
+        }
+
+        .bank-logo img {
+            width: 100%;
+            height: 100%;
+
+            padding: 6px;
+
+            object-fit: contain;
+        }
+
+
+        /* ================================
+           BANK NAME
+        ================================= */
+
+        .bank-name {
+            flex: 1;
+
+            color: #092b62;
+
+            font-size: 23px;
+
+            font-weight: 900;
+        }
+
+        .bank-label {
+            position: relative;
+
+            z-index: 2;
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            background: #edf5ff;
+
+            color: #1161bd;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        /* ================================
+           ACCOUNT
+        ================================= */
+
+        .account-label {
+            margin-bottom: 5px;
+
+            color: #7b8798;
+
+            font-size: 12px;
+        }
+
+        .sinhala-label {
+            margin-bottom: 8px;
+
+            color: #5d6b80;
+
+            font-size: 13px;
+        }
+
+        .account-number {
+            margin-bottom: 20px;
+
+            color: #111c31;
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            word-break: break-all;
+        }
+
+
+        /* ================================
+           COPY BUTTON
+        ================================= */
+
+        .copy-btn {
+            position: relative;
+
+            z-index: 3;
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b55ad,
+                    #1269d1
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .25s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #073d82,
+                    #0b55ad
+                );
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,80,180,.20);
+        }
+
+        .copy-btn:active {
+            transform: scale(.98);
+        }
+
+
+        /* ================================
+           WHATSAPP SECTION
+        ================================= */
+
+        .notice {
+            max-width: 1050px;
+
+            margin: 0 auto 65px;
+
+            padding: 0 25px;
+        }
+
+        .notice-box {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+            padding: 30px;
+
+            border-radius: 23px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #08285d,
+                    #1265ca
+                );
+
+            color: white;
+
+            box-shadow:
+                0 15px 45px
+                rgba(10,55,120,.20);
+        }
+
+        .notice-icon {
+            min-width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,.15);
+
+            font-size: 25px;
+        }
+
+        .notice-content {
+            width: 100%;
+        }
+
+        .notice h3 {
+            margin-bottom: 8px;
+
+            font-size: 21px;
+        }
+
+        .notice p {
+            color:
+                rgba(255,255,255,.92);
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ================================
+           WHATSAPP NUMBER
+        ================================= */
+
+        .whatsapp-number {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 10px 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.20);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.12);
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+
+        /* ================================
+           WHATSAPP BUTTON
+        ================================= */
+
+        .whatsapp-btn {
+            width: 100%;
+            max-width: 440px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 18px;
+
+            padding: 14px 20px;
+
+            border-radius: 12px;
+
+            background: #25D366;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,.15);
+
+            transition: .25s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+
+            background: #20bd5b;
+
+            box-shadow:
+                0 12px 25px
+                rgba(0,0,0,.20);
+        }
+
+        .whatsapp-icon {
+            font-size: 23px;
+        }
+
+        .whatsapp-text {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
+
+        .whatsapp-text small {
+            margin-top: 2px;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            opacity: .9;
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+            padding: 32px 7%;
+
+            text-align: center;
+
+            background: #061936;
+
+            color: white;
+        }
+
+        footer h3 {
+            margin-bottom: 7px;
+
+            font-size: 17px;
+        }
+
+        footer p {
+            color: #a0aec0;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .copyright {
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.1);
+
+            color: #75849c;
+
+            font-size: 12px;
+        }
+
+
+        /* ================================
+           TOAST
+        ================================= */
+
+        .toast {
+            position: fixed;
+
+            left: 50%;
+            bottom: 25px;
+
+            z-index: 1000;
+
+            padding: 13px 23px;
+
+            border-radius: 11px;
+
+            background: #101c31;
+
+            color: white;
+
+            font-size: 14px;
+
+            opacity: 0;
+
+            transform:
+                translateX(-50%)
+                translateY(100px);
+
+            pointer-events: none;
+
+            transition: .35s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 15px 5%;
+            }
+
+            .secure {
+                display: none;
+            }
+
+            .hero {
+                margin-top: 40px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .bank-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .account-number {
+                font-size: 21px;
+            }
+
+            .notice-box {
+                padding: 22px;
+
+                flex-direction: column;
+            }
+
+            .whatsapp-btn {
+                flex-direction: column;
+
+                gap: 4px;
+
+                text-align: center;
+            }
+
+            .whatsapp-text {
+                align-items: center;
+            }
+
+        }
+
+
+        /* ================================
+           SMALL MOBILE
+        ================================= */
+
+        @media (max-width: 420px) {
+
+            .hero {
+                padding: 0 18px;
+            }
+
+            .payments {
+                padding: 0 18px;
+            }
+
+            .notice {
+                padding: 0 18px;
+            }
+
+            .bank-card {
+                padding: 21px;
+            }
+
+            .account-number {
+                font-size: 19px;
+
+                letter-spacing: 1px;
+            }
+
+            .bank-name {
+                font-size: 20px;
+            }
+
+            .bank-logo {
+                width: 55px;
+                height: 55px;
+            }
+
+            .bank-label {
+                display: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            P
+        </div>
+
+        <div>
+
+            <h2>
+                Payment Portal
+            </h2>
+
+            <span>
+                ගෙවීම් තොරතුරු පද්ධතිය
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="secure">
+
+        🔒 Secure Payment
+        |
+        ආරක්ෂිත ගෙවීම්
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="hero">
+
+    <div class="badge">
+
+        ✓ PAYMENT INFORMATION
+        |
+        ගෙවීම් තොරතුරු
+
+    </div>
+
+
+    <h1>
+
+        Simple & Secure
+
+        <br>
+
+        <span>
+            Payment Details
+        </span>
+
+    </h1>
+
+
+    <p>
+
+        ඔබගේ ගෙවීම් කටයුතු සඳහා පහත සඳහන්
+        අපගේ බැංකු ගිණුම් භාවිතා කරන්න.
+
+        <br>
+
+        Please use one of the following company
+        bank accounts to make your payment securely.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================================
+     BANK ACCOUNTS
+========================================= -->
+
+<section class="payments">
+
+
+    <div class="section-title">
+
+        <h2>
+            Company Bank Accounts
+        </h2>
+
+        <p>
+
+            සමාගමේ බැංකු ගිණුම් විස්තර
+
+            <br>
+
+            Select your preferred bank and
+            make your payment securely.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="bank-grid">
+
+
+
+        <!-- =================================
+             NDB
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="Ndb bank.png" alt="NDB Bank Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    NDB
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                101000138224
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('101000138224')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             HNB
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="HNB Logo.png" alt="HNB Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    HNB
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                025010006018
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('025010006018')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             COMMERCIAL BANK
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="Commercial bank.png" alt="Commercial Bank Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    Commercial Bank
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                1650013520
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('1650013520')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             HNB SECOND ACCOUNT
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="HNB Logo.png" alt="HNB Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    HNB
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                214010001201
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('214010001201')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             BOC
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="BOC.png" alt="BOC Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    BOC
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                0074740403
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('0074740403')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================
+             SAMPATH BANK
+        ================================== -->
+
+        <div class="bank-card">
+
+            <div class="bank-top">
+
+                <div class="bank-logo">
+
+                    <img src="sampath bank.png" alt="Sampath Bank Logo">
+
+                </div>
+
+                <div class="bank-name">
+                    Sampath Bank
+                </div>
+
+                <div class="bank-label">
+                    BANK ACCOUNT
+                </div>
+
+            </div>
+
+
+            <div class="account-label">
+                Account Number
+            </div>
+
+
+            <div class="sinhala-label">
+                ගිණුම් අංකය
+            </div>
+
+
+            <div class="account-number">
+                007110002550
+            </div>
+
+
+            <button
+                class="copy-btn"
+                onclick="copyAccount('007110002550')">
+
+                📋 Copy Account Number
+                |
+                ගිණුම් අංකය පිටපත් කරන්න
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     PAYMENT RECEIPT / WHATSAPP
+========================================= -->
+
+<section class="notice">
+
+
+    <div class="notice-box">
+
+
+        <div class="notice-icon">
+            ✓
+        </div>
+
+
+        <div class="notice-content">
+
+
+            <h3>
+
+                Payment Receipt
+                |
+                ගෙවීම් රිසිට්පත
+
+            </h3>
+
+
+            <p>
+
+                ගෙවීම සිදු කිරීමෙන් පසු ඔබගේ
+                payment receipt එක පහත WhatsApp
+                අංකයට එවන්න.
+
+                <br>
+
+                After making your payment, please send
+                your payment receipt to the WhatsApp
+                number below.
+
+            </p>
+
+
+            <div class="whatsapp-number">
+
+                📱 +94 70 273 7370
+
+            </div>
+
+
+            <!-- DIRECT WHATSAPP -->
+
+            <a
+                href="https://wa.me/94702737370?text=Hello%2C%20I%20have%20made%20the%20payment.%20Please%20find%20my%20payment%20receipt%20attached."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="whatsapp-btn"
+            >
+
+                <span class="whatsapp-icon">
+                    💬
+                </span>
+
+
+                <span class="whatsapp-text">
+
+                    Send Receipt on WhatsApp
+
+                    <small>
+                        ගෙවීම් රිසිට්පත WhatsApp කරන්න
+                    </small>
+
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+
+    <h3>
+
+        Payment Information
+        |
+        ගෙවීම් තොරතුරු
+
+    </h3>
+
+
+    <p>
+
+        ඔබ අපගේ සේවාව තෝරා ගැනීම පිළිබඳව
+        ස්තූතියි.
+
+        <br>
+
+        Thank you for choosing our services.
+
+    </p>
+
+
+    <div class="copyright">
+
+        © 2026 All Rights Reserved.
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- =========================================
+     TOAST
+========================================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Account number copied successfully ✓
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+/* =========================================
+   COPY BANK ACCOUNT
+========================================= */
+
+function copyAccount(number) {
+
+    if (
+        navigator.clipboard &&
+        window.isSecureContext
+    ) {
+
+        navigator.clipboard
+            .writeText(number)
+            .then(function () {
+
+                showToast(
+                    "Account number copied successfully ✓"
+                );
+
+            })
+            .catch(function () {
+
+                fallbackCopy(number);
+
+            });
+
+    } else {
+
+        fallbackCopy(number);
+
+    }
+
+}
+
+
+
+/* =========================================
+   FALLBACK COPY
+========================================= */
+
+function fallbackCopy(number) {
+
+    const textArea =
+        document.createElement("textarea");
+
+    textArea.value = number;
+
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+
+    document.body.appendChild(textArea);
+
+    textArea.focus();
+    textArea.select();
+
+    try {
+
+        document.execCommand("copy");
+
+        showToast(
+            "Account number copied successfully ✓"
+        );
+
+    } catch (error) {
+
+        showToast(
+            "Please copy the account number manually."
+        );
+
+    }
+
+    document.body.removeChild(textArea);
+
+}
+
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(function () {
+
+        toast.classList.remove("show");
+
+    }, 2200);
+
+}
+
+</script>
+
+
+</body>
+</html>
